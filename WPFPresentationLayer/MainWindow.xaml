@@ -1,0 +1,93 @@
+﻿<Window x:Class="WPFPresentationLayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFPresentationLayer"
+        mc:Ignorable="d"
+        Title="Training Manager" MinHeight="700" MinWidth="1300" Icon="/stopwatch.png">
+    <Window.Effect>
+        <DropShadowEffect/>
+    </Window.Effect>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Vertical">
+            
+            <Border Background="DarkCyan" Padding="10" Margin="0 0 0 10">
+                <TextBlock x:Name="MenuTitle" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White">Training Manager Menu</TextBlock>
+            </Border>
+
+            <Button x:Name="trainingOverview" Click="trainingOverview_Click"
+                    Background="Transparent" BorderThickness="0">
+                <DockPanel Width="300">
+                    <Image Source="/circle.png" Width="25" Height="25" />
+                    <TextBlock FontSize="15" Padding="50 0 0 0">Overzicht</TextBlock>
+                </DockPanel>
+            </Button>
+            
+            <Rectangle Height="25"></Rectangle>
+            <Button x:Name="trainingAdd" 
+                    Background="Transparent" BorderThickness="0"
+                    Click="trainingAdd_Click">
+                <DockPanel Width="300">
+                    <Image Width="25" Height="25" Source="/plus.png" />
+                    <TextBlock FontSize="15" Padding="50 0 0 0">Voeg een training toe</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button x:Name="trainingRemove" Click="trainingRemove_Click"
+                    Background="Transparent" BorderThickness="0">
+                <DockPanel Width="300">
+                    <Image Width="25" Height="25" Source="/cancel.png" />
+                    <TextBlock FontSize="15" Padding="50 0 0 0">Verwijder een training</TextBlock>
+                </DockPanel>
+            </Button>
+            
+            <Rectangle Height="25"></Rectangle>
+            <Button x:Name="reportTotal" Click="reportTotal_Click"
+                    Background="Transparent" BorderThickness="0">
+                <DockPanel Width="300">
+                    <Image Width="25" Height="25" Source="/cycling.png" />
+                    <TextBlock FontSize="15" Padding="50 0 0 0">Training rapport</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button x:Name="reportRun" Click="reportRun_Click"
+                    Background="Transparent" BorderThickness="0">
+                <DockPanel Width="300">
+                    <Image Width="25" Height="25" Source="/running.png" />
+                    <TextBlock FontSize="15" Padding="50 0 0 0">Looptraining rapport</TextBlock>
+                </DockPanel>
+            </Button>
+            <Button x:Name="reportCyc" Click="reportCyc_Click"
+                    Background="Transparent" BorderThickness="0">
+                <DockPanel Width="300">
+                    <Image Width="25" Height="25" Source="/cyclist.png" />
+                    <TextBlock FontSize="15" Padding="50 0 0 0">Fietstraining rapport</TextBlock>
+                </DockPanel>
+            </Button>
+        </StackPanel>
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <!-- Variable controls here-->
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="4" Grid.RowSpan="2">
+            <Frame x:Name="ContFrame" Source="OverviewFrame.xaml" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</Window>

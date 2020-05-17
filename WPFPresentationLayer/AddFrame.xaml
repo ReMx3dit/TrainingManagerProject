@@ -1,0 +1,106 @@
+﻿<Page x:Class="WPFPresentationLayer.AddFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentationLayer" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddFrame">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Left" Background="DarkCyan" Grid.ColumnSpan="2" Height="43.94">
+            <RadioButton x:Name="radioLoopTraining" IsChecked="True" Padding="5" VerticalContentAlignment="Center" Width="84">
+                <Image Source="/running.png" Width="25"></Image>
+            </RadioButton>
+            <RadioButton x:Name="radioFietsTraining" Padding="5" VerticalContentAlignment="Center">
+                <Image Source="/cycling.png" Width="25"></Image>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Background="White">
+            <TextBlock Text="Start van de training: "></TextBlock>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <DatePicker Name="dateWhen" Width="170"></DatePicker>
+                    <Border BorderBrush="Gray" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal" Margin="5 0 5 0" Height="15.96">
+                            <TextBox x:Name="timeWhenHr" MinWidth="30" BorderThickness="0" FlowDirection="RightToLeft" Text="{Binding Path=timeWhenHr, FallbackValue=12}"/>
+                            <Label Content=":" Background="Transparent" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontWeight="Bold" FontFamily="Arial" RenderTransformOrigin="0.5,0.5" Height="30" >
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform Y="-5"/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                            <TextBox x:Name="timeWhenMin" MinWidth="30" BorderThickness="0" Text="{Binding Path=timeWhenMin, FallbackValue=00}"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Text="Afstand: " Margin="0 20 0 0"></TextBlock>
+            <TextBox x:Name="textboxAfstand"></TextBox>
+
+            <TextBlock Text="Duur van de training: " Margin="0 20 0 0"></TextBlock>
+            <DockPanel>
+                <TextBox Text="{Binding ElementName=sliderTimeSpan, Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="40"></TextBox>
+                <TextBlock Text=" uur" Margin="0 0 10 0"></TextBlock>
+                <Slider x:Name="sliderTimeSpan" Maximum="24" Minimum="0.5" TickFrequency="0.25" IsSnapToTickEnabled="True"></Slider>
+            </DockPanel>
+
+            <TextBlock Text="Gemiddelde snelheid: " Margin="0 20 0 0"></TextBlock>
+            <TextBox x:Name="textboxSnelheid"></TextBox>
+
+            <TextBlock Text="Gemiddelde wattage: " Margin="0 20 0 0" Visibility="{Binding IsChecked, ElementName=radioFietsTraining, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+            <TextBox x:Name="textboxWattage" Visibility="{Binding IsChecked, ElementName=radioFietsTraining, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBox>
+
+            <TextBlock Text="Type training: " Margin="0 20 0 0"></TextBlock>
+            <ComboBox Name="comboboxTrainingType">
+                <ComboBoxItem IsSelected="True">Uithouding</ComboBoxItem>
+                <ComboBoxItem>Interval</ComboBoxItem>
+                <ComboBoxItem>Recuperatie</ComboBoxItem>
+            </ComboBox>
+
+            <TextBlock Text="Type fiets: " Margin="0 20 0 0" Visibility="{Binding IsChecked, ElementName=radioFietsTraining, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+            <ComboBox Name="comboboxFietsType" Visibility="{Binding IsChecked, ElementName=radioFietsTraining, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <ComboBoxItem IsSelected="True">Indoor bike</ComboBoxItem>
+                <ComboBoxItem>Racing bike</ComboBoxItem>
+                <ComboBoxItem>City bike</ComboBoxItem>
+                <ComboBoxItem>Mountain bike</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Margin="20">
+            <TextBlock Text="Comments: " Margin="10 0 0 0"></TextBlock>
+            <TextBox x:Name="richtextComments" Height="200" Margin="10 0 10 10" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
+        </StackPanel>
+
+        <DockPanel Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <Button x:Name="Submit" Content="Voeg toe" 
+                    Click="Submit_Click" Margin="20 0 30 20"
+                     Height="20" ></Button>
+        </DockPanel>
+
+    </Grid>
+</Page>

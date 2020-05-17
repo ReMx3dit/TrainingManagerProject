@@ -20,8 +20,8 @@ namespace ConsoleAppPresentationLayer
             //Report r1=m.GenerateMonthlyCyclingReport(2020, 4);            
             //Report r2=m.GenerateMonthlyRunningReport(2020, 4);
             Console.WriteLine("---------------------------");
-            Report r3=m.GenerateMonthlyTrainingsReport(2020, 4);
-            foreach(var s in  r3.TimeLine)
+            Report r3 = m.GenerateMonthlyTrainingsReport(2020, 4);
+            foreach (var s in r3.TimeLine)
             {
                 Console.WriteLine($"{s.Item1.ToString()},{s.Item2}");
             }
