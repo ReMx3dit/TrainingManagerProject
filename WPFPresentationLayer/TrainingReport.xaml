@@ -7,76 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TrainingReport">
-    <Page.Resources>
-        <Style x:Key="cellStyle" TargetType="DataGridCell">
-            <Setter Property="Padding" Value="5 0 5 0" />
-            <Setter Property="Margin" Value="0" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="DataGridCell">
-                        <Border Background="LightGray" BorderThickness="0">
-                            <Border x:Name="border"
-                              Background="Transparent">
-                                <ContentPresenter />
-                            </Border>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="true">
-                                <Setter TargetName="border" Property="Background" Value="DarkCyan"/>
-                            </DataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
 
-        <Style x:Key="rowStyle" TargetType="DataGridRow">
-            <Setter Property="Padding" Value="0 5 0 5" />
-            <Setter Property="Margin" Value="0 5 0 5" />
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type DataGridRow}">
-                        <Border x:Name="DGR_Border"
-                        BorderBrush="DarkCyan"
-                        BorderThickness="1"
-                        Background="DarkCyan"
-                        SnapsToDevicePixels="True">
-                            <SelectiveScrollingGrid>
-                                <SelectiveScrollingGrid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </SelectiveScrollingGrid.ColumnDefinitions>
-                                <SelectiveScrollingGrid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </SelectiveScrollingGrid.RowDefinitions>
-                                <DataGridCellsPresenter Grid.Column="1"
-                                                ItemsPanel="{TemplateBinding ItemsPanel}"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                <DataGridDetailsPresenter Grid.Column="1"
-                                                  Grid.Row="1"
-                                                  SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                  Visibility="{TemplateBinding DetailsVisibility}" />
-                                <DataGridRowHeader Grid.RowSpan="2"
-                                           SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
-                                           Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                            </SelectiveScrollingGrid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="headerStyle" TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="5 0 5 0"/>
-        </Style>
-    </Page.Resources>
-    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -89,15 +20,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="4">
             <TextBlock Text="Training rapport" Foreground="DarkCyan" FontSize="18"></TextBlock>
-            <ComboBox Name="datePicker" Margin="165 0 0 0" MinWidth="150" SelectionChanged="datePicker_SelectionChanged" ItemStringFormat="MM-yyyy">
-            </ComboBox>
         </StackPanel>
+        <ComboBox Name="datePicker" Margin="165 0 0 0" MinWidth="150" SelectionChanged="datePicker_SelectionChanged" ItemStringFormat="MM-yyyy" Grid.Column="3" Grid.ColumnSpan="3"/>
         <Grid Margin="0 10 0 0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

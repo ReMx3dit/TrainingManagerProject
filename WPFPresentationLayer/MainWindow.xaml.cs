@@ -47,12 +47,12 @@ namespace WPFPresentationLayer
 
         private void reportRun_Click(object sender, RoutedEventArgs e)
         {
-
+            ContFrame.Source = new Uri("RunningReport.xaml", UriKind.Relative);
         }
 
         private void reportCyc_Click(object sender, RoutedEventArgs e)
         {
-
+            ContFrame.Source = new Uri("CyclingReport.xaml", UriKind.Relative);
         }
     }
 }

@@ -13,7 +13,6 @@
     <None Remove="cyclist.png" />
     <None Remove="downarrow.png" />
     <None Remove="endurance.png" />
-    <None Remove="icons8-collapse-arrow-50.png" />
     <None Remove="interval.png" />
     <None Remove="plus.png" />
     <None Remove="recuperation.png" />
@@ -37,7 +36,6 @@
     <Resource Include="cyclist.png" />
     <Resource Include="downarrow.png" />
     <Resource Include="endurance.png" />
-    <Resource Include="icons8-collapse-arrow-50.png" />
     <Resource Include="interval.png" />
     <Resource Include="plus.png" />
     <Resource Include="recuperation.png" />

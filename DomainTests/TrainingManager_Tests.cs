@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Shouldly;
 using System;
+using System.Collections.Generic;
 
 namespace DomainTests
 {
@@ -26,7 +27,6 @@ namespace DomainTests
             TM.AddRunningTraining(new DateTime(2020, 3, 17, 11, 0, 00), 5000, new TimeSpan(0, 28, 10), null, TrainingType.Interval, "3x700m");
             TM.AddRunningTraining(new DateTime(2020, 3, 17, 11, 0, 00), 8000, new TimeSpan(0, 42, 10), null, TrainingType.Endurance, null);
         }
-
 
         [TestMethod, TestCategory("ExceptionsTests")]
         public void AddTraining_ShouldThrowException_IfWhenIsBeforeNow()
@@ -59,6 +59,33 @@ namespace DomainTests
 
             ExpectedException = Should.Throw<DomainException>(() => TM.AddRunningTraining(DateTime.Now, 10000, TimeSpan.FromHours(25), null, TrainingType.Endurance, null));
             ExpectedException.Message.ShouldBe("Time invalid value");
+        }
+
+        [TestMethod, TestCategory("MethodTests")]
+        public void RemoveTraining_ShouldExecute()
+        {
+            var expectedSingle = 2;
+            var expectedMultiple = 1;
+
+            TM = new TrainingManager(new UnitOfWork(new TrainingContextTest()));
+            TM.RemoveTrainings(new List<int>() { 0 }, new List<int>() { });
+
+            TM.GetAllCyclingSessions().Count.ShouldBe(expectedSingle);
+            TM.GetAllRunningSessions().Count.ShouldBe(expectedMultiple);
+        }
+
+        [TestMethod, TestCategory("MethodTests")]
+        public void Report_ShouldHaveCorrectValues()
+        {
+            var expectedSessies = 5;
+            var expectedRunDistance = 10000;
+            var expectedMaxWatt = 219;
+
+            Report r = TM.GenerateMonthlyTrainingsReport(2020, 4);
+
+            r.TotalSessions.ShouldBe(expectedSessies);
+            r.TotalRunningDistance.ShouldBe(expectedRunDistance);
+            r.MaxWattSessionCycling.AverageWatt.ShouldBe(expectedMaxWatt);
         }
     }
 }

@@ -133,7 +133,7 @@
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Verwijder" Click="Button_Click" Width="100"/>
+                                <Button Content="Verwijder" Click="Button_Click" Command="Delete" Width="100"/>
                             </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

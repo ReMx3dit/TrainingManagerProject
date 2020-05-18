@@ -1,0 +1,208 @@
+﻿<Page x:Class="WPFPresentationLayer.CyclingReport"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFPresentationLayer"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CyclingReport">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="4">
+            <TextBlock Text="Fietstraining rapport" Foreground="DarkCyan" FontSize="18"></TextBlock>
+        </StackPanel>
+        <ComboBox Name="datePicker" Margin="165 0 0 0" MinWidth="150" SelectionChanged="datePicker_SelectionChanged" ItemStringFormat="MM-yyyy" Grid.Column="3" Grid.ColumnSpan="3"/>
+        <Grid Margin="0 10 0 0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Margin="10" Grid.Row="2">
+                <TextBlock Text="Aantal fiets sessies:"/>
+                <TextBlock Text="Fietstraining tijd:"/>
+                <TextBlock Text="Fietstraining afstand:"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10" Grid.Row="2" Grid.Column="2">
+                <TextBlock x:Name="amountCyclingsessions"/>
+                <TextBlock x:Name="cyclingsessionTime"/>
+                <TextBlock x:Name="cyclingsessionDistance"/>
+            </StackPanel>
+        </Grid>
+        <Border Padding="20" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="4">
+            <DataGrid x:Name="dgOverview" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"
+                      BorderThickness="0" Background="White" ColumnHeaderStyle="{StaticResource headerStyle}"
+                      RowHeaderWidth="0" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent"
+                      RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header=" ">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding col0}" Width="20">
+                                    <Image.ToolTip>
+                                        <ToolTip Content="{Binding col0.UriSource}"/>
+                                    </Image.ToolTip>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Type training">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding col1}" Width="20">
+                                    <Image.ToolTip>
+                                        <ToolTip Content="{Binding col1.UriSource}"/>
+                                    </Image.ToolTip>
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding col2, StringFormat={}{0:dd/MM/yy HH:mm}}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Afstand" Binding="{Binding col3}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Tijd" Binding="{Binding col4}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Gem. Snelheid" Binding="{Binding col5}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Gem. Watt" Binding="{Binding col6}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Fiets type" Binding="{Binding col7}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Comments" Binding="{Binding col8}" Width="*" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        
+        <TextBlock Grid.Row="2" Text="Beste sessies" Foreground="DarkCyan" FontSize="18" Padding="5 0 0 0"/>
+        
+        
+        
+        <TextBlock Text="Max. Watt" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right"/>
+        <TextBlock Text="Max. Distance" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right"/>
+        <TextBlock Text="Max. Speed" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right"/>
+
+        <DataGrid x:Name="dgMaxWatt" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"
+                    BorderThickness="0" Background="White" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="4"
+            RowHeaderWidth="0" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent"
+                    RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ColumnHeaderHeight="0">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header=" ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding col0}" Width="20">
+                                <Image.ToolTip>
+                                    <ToolTip Content="{Binding col0.UriSource}"/>
+                                </Image.ToolTip>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Type training">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding col1}" Width="20">
+                                <Image.ToolTip>
+                                    <ToolTip Content="{Binding col1.UriSource}"/>
+                                </Image.ToolTip>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Datum" Binding="{Binding col2, StringFormat={}{0:dd/MM/yy HH:mm}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Afstand" Binding="{Binding col3}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tijd" Binding="{Binding col4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gem. Snelheid" Binding="{Binding col5}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gem. Watt" Binding="{Binding col6}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fiets type" Binding="{Binding col7}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Comments" Binding="{Binding col8}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="dgMaxDist" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"
+                    BorderThickness="0" Background="White" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="4"
+            RowHeaderWidth="0" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent"
+                    RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ColumnHeaderHeight="0">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header=" ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding col0}" Width="20">
+                                <Image.ToolTip>
+                                    <ToolTip Content="{Binding col0.UriSource}"/>
+                                </Image.ToolTip>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Type training">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding col1}" Width="20">
+                                <Image.ToolTip>
+                                    <ToolTip Content="{Binding col1.UriSource}"/>
+                                </Image.ToolTip>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Datum" Binding="{Binding col2, StringFormat={}{0:dd/MM/yy HH:mm}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Afstand" Binding="{Binding col3}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tijd" Binding="{Binding col4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gem. Snelheid" Binding="{Binding col5}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gem. Watt" Binding="{Binding col6}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fiets type" Binding="{Binding col7}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Comments" Binding="{Binding col8}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid x:Name="dgMaxSpeed" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled"
+                    BorderThickness="0" Background="White"  Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="4"
+            RowHeaderWidth="0" VerticalGridLinesBrush="Transparent" HorizontalGridLinesBrush="Transparent"
+                    RowStyle="{StaticResource rowStyle}" CellStyle="{StaticResource cellStyle}" ColumnHeaderHeight="0">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header=" ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding col0}" Width="20">
+                                <Image.ToolTip>
+                                    <ToolTip Content="{Binding col0.UriSource}"/>
+                                </Image.ToolTip>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Type training">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding col1}" Width="20">
+                                <Image.ToolTip>
+                                    <ToolTip Content="{Binding col1.UriSource}"/>
+                                </Image.ToolTip>
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Datum" Binding="{Binding col2, StringFormat={}{0:dd/MM/yy HH:mm}}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Afstand" Binding="{Binding col3}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tijd" Binding="{Binding col4}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gem. Snelheid" Binding="{Binding col5}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Gem. Watt" Binding="{Binding col6}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Fiets type" Binding="{Binding col7}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Comments" Binding="{Binding col8}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>
