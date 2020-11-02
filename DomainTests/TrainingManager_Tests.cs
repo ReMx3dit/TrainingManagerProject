@@ -65,10 +65,10 @@ namespace DomainTests
         public void RemoveTraining_ShouldExecute()
         {
             var expectedSingle = 2;
-            var expectedMultiple = 1;
+            var expectedMultiple = 2;
 
-            TM = new TrainingManager(new UnitOfWork(new TrainingContextTest()));
-            TM.RemoveTrainings(new List<int>() { 0 }, new List<int>() { });
+            TM = new TrainingManager(new UnitOfWork(new TrainingContextTest(true)));
+            TM.RemoveTrainings(new List<int>() { 1 }, new List<int>() { 2, 3 });
 
             TM.GetAllCyclingSessions().Count.ShouldBe(expectedSingle);
             TM.GetAllRunningSessions().Count.ShouldBe(expectedMultiple);
@@ -86,6 +86,17 @@ namespace DomainTests
             r.TotalSessions.ShouldBe(expectedSessies);
             r.TotalRunningDistance.ShouldBe(expectedRunDistance);
             r.MaxWattSessionCycling.AverageWatt.ShouldBe(expectedMaxWatt);
+        }
+        [DataTestMethod, TestCategory("MethodTests")]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void GetPreviousSessions_ShouldReturnCorrectAmount(int count)
+        {
+            var expected = count;
+
+            TM.GetPreviousCyclingSessions(count).Count.ShouldBe(expected);
+            TM.GetPreviousRunningSessions(count).Count.ShouldBe(expected);
         }
     }
 }
