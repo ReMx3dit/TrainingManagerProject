@@ -21,4 +21,4 @@ The main focus of the project was:
 
 ## Example output
 
-![example](https://www.vangijseghem.be/ImageStore/example.gif "Example")
+![example](https://www.vangijseghem.be/ImageStore/example.gif)
