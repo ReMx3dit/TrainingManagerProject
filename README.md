@@ -22,3 +22,5 @@ The main focus of the project was:
 ## Example output
 
 ![example](http://www.vangijseghem.be/ImageStore/example.gif)
+
+*in case github doesnt generate the link properly: http://www.vangijseghem.be/ImageStore/example.gif*
